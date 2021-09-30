@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NetSign测试</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="./js/InfosecNetSignCNGAgent.min.js"></script>
+    <script src="./js/NetSignAgent.js"></script>
+    <script>
+        /**
+         * 验签、业务逻辑 服务端模式
+         * @param signedData
+         */
+        /*function next1(signedData) {
+            $("#signedData").val(signedData);
+            //服务端验签
+            $.ajax({
+                type: "POST",
+                url: "./index.php",
+                data: {
+                    signedData: signedData
+                },
+                dataType: "json",
+                success: function (data) {
+                    $("#resData").val(JSON.stringify(data));
+                }
+            });
+        }
+        var obj = new NetSignAgent({
+            type: 1,
+            callback: next1,
+            defultDN: '投资',
+        });
+        obj.start_sign();*/
+
+        //前端模式
+        function next2(certDN) {
+            $("#resData").val(certDN);
+        }
+
+        var obj = new NetSignAgent({
+            type: 2,
+            callback: next2,
+            defultDN: '投资',
+        });
+        obj.start_sign();
+    </script>
+    <style>
+        textarea {width: 800px;height: 300px;}
+    </style>
+</head>
+<body>
+<div>
+    <p>签名数据</p>
+    <textarea id="signedData" readonly></textarea>
+</div>
+<div>
+    <p>验签结果</p>
+    <textarea id="resData" readonly></textarea>
+</div>
+</body>
+</html>
